@@ -16,9 +16,7 @@ class Pion extends ClassBidak {
     // Method
     clickBidak () {
 
-        // Hapus lingkaran
         this.papanPermukaan.innerHTML = "";
-
         this.buatLingkaran(this.x, this.y - this.ukuranArea);
 
         if (this.firstMove) {

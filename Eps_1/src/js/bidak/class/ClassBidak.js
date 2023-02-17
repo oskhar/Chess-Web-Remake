@@ -51,13 +51,12 @@ class ClassBidak {
 
         this.lingkaran = document.createElement('div');
         this.lingkaran.style.position = "absolute";
-        this.lingkaran.style.left = x + "px";
-        this.lingkaran.style.top = y + "px";
-        this.lingkaran.style.width = this.ukuranArea-40 + "px";
-        this.lingkaran.style.height = this.ukuranArea-40 + "px";
-        this.lingkaran.style.border = "20px solid #afed65";
-        this.lingkaran.style.borderRadius = "60%";
-        this.lingkaran.style.background = "transparent";
+        this.lingkaran.style.left = (x + (this.ukuranArea/4)) + "px";
+        this.lingkaran.style.top = (y + (this.ukuranArea/4)) + "px";
+        this.lingkaran.style.width = this.ukuranArea/2 + "px";
+        this.lingkaran.style.height = this.ukuranArea/2 + "px";
+        this.lingkaran.style.borderRadius = "50%";
+        this.lingkaran.style.background = "rgba(0, 0, 0, 0.5)";
         this.lingkaran.addEventListener('click', this.move.bind(this, x, y));
         this.papanPermukaan.appendChild(this.lingkaran);
 
