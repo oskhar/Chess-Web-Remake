@@ -58,6 +58,7 @@ class ClassBidak {
         this.lingkaran.style.borderRadius = "50%";
         this.lingkaran.style.background = "rgba(0, 0, 0, 0.5)";
         this.lingkaran.addEventListener('click', this.move.bind(this, x, y));
+        this.lingkaran.style.zIndex = "2";
         this.papanPermukaan.appendChild(this.lingkaran);
 
     }
