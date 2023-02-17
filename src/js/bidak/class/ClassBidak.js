@@ -7,7 +7,7 @@ class ClassBidak {
         // Atribute
         this.x = x;
         this.y = y;
-        this.ukuranArea = ukuranArea;
+        this.ukuranArea = ukuranArea+100;
         this.papanPermukaan = papanCaturPermukaan;
 
         // Create element
@@ -18,6 +18,8 @@ class ClassBidak {
         this.element.style.left = this.x+"px";
         this.element.style.top = this.y+"px";
         this.element.style.background = "url('" + background + "')";
+        this.element.style.backgroundSize = "100% 100%";
+        this.element.style.backgroundPositionX = "center";
         papanCatur.appendChild(this.element);
 
     }
