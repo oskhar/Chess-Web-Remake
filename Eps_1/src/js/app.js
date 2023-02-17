@@ -9,7 +9,7 @@ var papanCatur = document.getElementById('Papan_Catur');
 var papanCaturPermukaan = document.getElementById('Papan_Catur_Permukaan');
 
 // Mengatur ukuran papan
-papanCatur.style.height = (8*ukuranArea)+"px";
+papanCatur.style.height = (8*ukuranArea)+"px"; 
 papanCatur.style.width = (8*ukuranArea)+"px";
 papanCaturPermukaan.style.height = (8*ukuranArea)+"px";
 papanCaturPermukaan.style.width = (8*ukuranArea)+"px";
