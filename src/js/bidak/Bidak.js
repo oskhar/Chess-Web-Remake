@@ -4,17 +4,17 @@ import { ClassBidak } from "./class/ClassBidak.js";
 class Pion extends ClassBidak {
 
     // Constructor
-    constructor (ukuranArea, x, y, background) {
+    constructor (papanCatur, papanCaturPermukaan, ukuranArea, x, y, background) {
 
-        super(ukuranArea, x, y, background);
-        this.papanPermukaan = document.getElementById('Papan_Catur_Permukaan');
+        super(papanCatur, papanCaturPermukaan, ukuranArea, x, y, background);
+        this.element.onclick = this.areaJalan();
 
     }
 
     // Method
     areaJalan () {
 
-
+        this.buatKotak(this.x, this.y + this.ukuranArea);
 
     }
 

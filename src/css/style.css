@@ -1,5 +1,14 @@
 #Papan_Catur {
-    position: relative;
-    top: 30px;
+    position: absolute;
+    left: 0;
+    right: 0;
     margin: auto;
+    top: 30px;
+}
+#Papan_Catur_Permukaan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 30px;
 }

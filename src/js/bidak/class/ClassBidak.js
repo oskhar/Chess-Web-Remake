@@ -2,12 +2,13 @@
 class ClassBidak {
 
     // Constructor
-    constructor (ukuranArea, x, y, background) {
+    constructor (papanCatur, papanCaturPermukaan, ukuranArea, x, y, background) {
 
         // Atribute
         this.x = x;
         this.y = y;
         this.ukuranArea = ukuranArea;
+        this.papanPermukaan = papanCaturPermukaan;
 
         // Create element
         this.element = document.createElement('div');
@@ -17,17 +18,17 @@ class ClassBidak {
         this.element.style.left = this.x+"px";
         this.element.style.top = this.y+"px";
         this.element.style.background = "url('" + background + "')";
-        document.getElementById('Papan_Catur').appendChild(this.element);
+        papanCatur.appendChild(this.element);
 
     }
 
     // Method
-    move (langkahKedepan, langkahKesamping) {
+    move (x, y) {
 
-        this.y = (-langkahKedepan * this.ukuranArea + this.y);
+        this.x = x;
+        this.y = y;
+
         this.element.style.top = this.y + "px";
-
-        this.x = (langkahKesamping * this.ukuranArea + this.x);
         this.element.style.left = this.x + "px";
 
     }
@@ -36,6 +37,20 @@ class ClassBidak {
     death () {
 
         this.element.remove();
+
+    }
+
+    // Method
+    buatKotak (x, y) {
+
+        this.kotak = document.createElement('div');
+        this.kotak.style.position = "absolute";
+        this.kotak.style.left = x + "px";
+        this.kotak.style.top = y + "px";
+        this.kotak.style.width = this.ukuranArea + "px";
+        this.kotak.style.height = this.ukuranArea + "px";
+        this.kotak.style.background = "cyan";
+        this.papanPermukaan.appendChild(this.kotak);
 
     }
 
