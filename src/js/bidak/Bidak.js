@@ -7,14 +7,24 @@ class Pion extends ClassBidak {
     constructor (papanCatur, papanCaturPermukaan, ukuranArea, x, y, background) {
 
         super(papanCatur, papanCaturPermukaan, ukuranArea, x, y, background);
-        this.element.onclick = this.areaJalan();
+        this.element.addEventListener('click', this.clickBidak.bind(this), false);
+
+        this.firstMove = true;
 
     }
 
     // Method
-    areaJalan () {
+    clickBidak () {
 
-        this.buatKotak(this.x, this.y + this.ukuranArea);
+        // Hapus lingkaran
+        this.papanPermukaan.innerHTML = "";
+
+        this.buatLingkaran(this.x, this.y - this.ukuranArea);
+
+        if (this.firstMove) {
+            this.buatLingkaran(this.x, this.y - 2*this.ukuranArea);
+            this.firstMove = false;
+        }
 
     }
 

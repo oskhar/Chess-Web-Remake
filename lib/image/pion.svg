@@ -24,8 +24,8 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      inkscape:zoom="4.3466667"
-     inkscape:cx="19.325153"
-     inkscape:cy="93.519938"
+     inkscape:cx="104.67791"
+     inkscape:cy="93.749999"
      inkscape:window-width="1920"
      inkscape:window-height="1056"
      inkscape:window-x="0"
@@ -36,13 +36,13 @@
      id="defs2377" />
   <g
      id="g2381"
-     transform="matrix(3.4090909,0,0,3.4090909,102.2725,95.454317)"
-     style="fill:#ffffff;fill-opacity:1">
+     transform="matrix(3.3531967,0,0,3.3531967,102.2725,95.566106)"
+     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-opacity:1">
     <path
        stroke="none"
        fill="#ffffff"
        d="m 10,-18 q 0,3.45 -2,6 1.65,0 2.8,1.15 1,1 1.2,2.3 V -6 q 0,1.65 -1.2,2.8 L 9.3,-2.2 12,14 h 1 q 1.65,0 2.8,1.15 1,1 1.2,2.3 V 21 h -34 v -3.55 h 0.05 q 0.15,-1.3 1.1,-2.3 Q -14.65,14 -13,14 h 1 l 2.7,-16.2 -1.55,-1 Q -12,-4.35 -12,-6 v -2.55 h 0.05 q 0.15,-1.3 1.1,-2.3 1.2,-1.15 2.85,-1.15 -2,-2.55 -2,-6 0,-4.15 2.9,-7.15 Q -4.15,-28 0,-28 q 4.15,0 7.05,2.85 2.95,3 2.95,7.15 m 8,50 h -36 q -1.65,0 -2.85,-1.2 Q -22,29.65 -22,28 v -2.55 h 0.05 q 0.15,-1.3 1.1,-2.3 l 0.2,-0.15 h 41.3 l 0.15,0.15 q 1,1 1.2,2.3 V 28 q 0,1.65 -1.2,2.8 Q 19.65,32 18,32"
        id="path2379"
-       style="fill:#ffffff;fill-opacity:1" />
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-opacity:1" />
   </g>
 </svg>

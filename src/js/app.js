@@ -24,7 +24,7 @@ for (let i = 0; i < 8; i++) {
         area.style.width = ukuranArea+"px";
         area.style.left = (i*ukuranArea)+"px";
         area.style.top = (j*ukuranArea)+"px";
-        area.style.background = (i*8+j+i) % 2 == 0 ? "white" : "black";
+        area.style.background = (i*8+j+i) % 2 == 0 ? "#f0dab5" : "#b48662";
         papanCatur.appendChild(area);
 
     }
@@ -34,7 +34,7 @@ for (let i = 0; i < 8; i++) {
 for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 8; j++) {
 
-        bidak[i*4+j] = new Bidak.Pion( papanCatur, papanCaturPermukaan, ukuranArea, j*ukuranArea, (i < 2 ? i*ukuranArea : (i+4)*ukuranArea), "./lib/image/pion.svg" );
+        bidak[i*4+j] = new Bidak.Pion( papanCatur, papanCaturPermukaan, ukuranArea, j*ukuranArea, (i < 2 ? i*ukuranArea : (i+4)*ukuranArea), "./lib/image/pion.png" );
 
     }
 }
