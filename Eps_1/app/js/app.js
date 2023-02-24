@@ -34,7 +34,7 @@ for (let i = 0; i < 8; i++) {
 for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 8; j++) {
 
-        bidak[i*4+j] = new Bidak.Pion( papanCatur, papanCaturPermukaan, ukuranArea, j*ukuranArea, (i < 2 ? i*ukuranArea : (i+4)*ukuranArea), "./lib/image/putih/pion.svg" );
+        bidak[i*4+j] = new Bidak.Pion( papanCatur, papanCaturPermukaan, ukuranArea, j*ukuranArea, (i < 2 ? i*ukuranArea : (i+4)*ukuranArea), "./assets/images/putih/pion.svg" );
 
     }
 }
