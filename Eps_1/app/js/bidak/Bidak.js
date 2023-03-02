@@ -1,4 +1,4 @@
-import { ClassBidak } from "./class/ClassBidak.js";
+import { ClassBidak } from "ClassBidak.js";
 
 // Class
 class Pion extends ClassBidak {
@@ -6,14 +6,18 @@ class Pion extends ClassBidak {
     // Constructor
     constructor (papanCatur, papanCaturPermukaan, ukuranArea, x, y, background) {
 
+        // Memanggul constructor parent
         super(papanCatur, papanCaturPermukaan, ukuranArea, x, y, background);
+
+        // Menambahkan event pada pion
         this.element.addEventListener('click', this.clickBidak.bind(this), false);
 
+        // Pion memiliki hak istimewa saat pertama kali jalan
         this.firstMove = true;
 
     }
 
-    // Method
+    // Method untuk menjalankan bidak pion
     clickBidak () {
 
         this.papanPermukaan.innerHTML = "";

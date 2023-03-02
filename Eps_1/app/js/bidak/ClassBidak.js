@@ -2,15 +2,16 @@
 class ClassBidak {
 
     // Constructor
-    constructor (papanCatur, papanCaturPermukaan, ukuranArea, x, y, background) {
+    constructor (papanCatur, papanCaturPermukaan, ukuranArea, x, y, background, poin) {
 
         // Atribute
+        this.poin = poin;
         this.x = x;
         this.y = y;
         this.ukuranArea = ukuranArea;
         this.papanPermukaan = papanCaturPermukaan;
 
-        // Create element
+        // Membuat bidak
         this.element = document.createElement('div');
         this.element.style.position = "absolute";
         this.element.style.width = this.ukuranArea+"px";
@@ -26,7 +27,7 @@ class ClassBidak {
 
     }
 
-    // Method
+    // Method untuk menggerakan bidak
     move (x, y) {
 
         this.x = x;
@@ -40,7 +41,7 @@ class ClassBidak {
 
     }
 
-    // Method
+    // Method untuk menghilangkan catur saat dimakan
     death () {
         this.element.remove();
 
