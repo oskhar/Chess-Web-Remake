@@ -6,7 +6,7 @@ class Pion extends ClassBidak {
     // Constructor
     constructor (papanCatur, papanCaturPermukaan, ukuranArea, x, y, background) {
 
-        // Memanggul constructor parent
+        // Memanggil constructor parent
         super(papanCatur, papanCaturPermukaan, ukuranArea, x, y, background);
 
         // Menambahkan event pada pion
@@ -27,6 +27,10 @@ class Pion extends ClassBidak {
             this.buatLingkaran(this.x, this.y - 2*this.ukuranArea);
             this.firstMove = false;
         }
+
+    }
+
+    getLegalMove () {
 
     }
 

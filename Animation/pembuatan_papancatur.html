@@ -33,14 +33,14 @@
         for (let j = 0; j < 8; j++) {
 
             let area = document.createElement('div');
-            area.innerHTML = (i*110) + "x" + (j*110);
+            area.innerHTML = String.fromCharCode(97+i) + "" + j;
             area.style.position = "absolute";
             area.style.height = ukuranArea+"px";
             area.style.width = ukuranArea+"px";
             area.style.left = (i*ukuranArea)+"px";
             area.style.top = (j*ukuranArea)+"px";
             area.style.zIndex = j*8+i;
-            area.style.animation = "move 600ms "+((j*8+i)*2)+"00ms ease-in-out forwards";
+            // area.style.animation = "move 600ms "+((j*8+i)*2)+"00ms ease-in-out forwards";
             area.style.background = (i*8+j+i) % 2 == 0 ? "#f0dab5" : "#b48662";
             papancatur.appendChild(area);
 
