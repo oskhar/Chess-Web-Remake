@@ -1,13 +1,13 @@
-import { ClassBidak } from "ClassBidak.js";
+import { ClassBidak } from "./ClassBidak.js";
 
 // Class
-class Pion extends ClassBidak {
+export class Pion extends ClassBidak {
 
     // Constructor
-    constructor (papanCatur, papanCaturPermukaan, ukuranArea, x, y, background) {
+    constructor (papanCatur, papanCaturPermukaan, ukuranArea, x, y, background, poin) {
 
         // Memanggil constructor parent
-        super(papanCatur, papanCaturPermukaan, ukuranArea, x, y, background);
+        super(papanCatur, papanCaturPermukaan, ukuranArea, x, y, background, poin);
 
         // Menambahkan event pada pion
         this.element.addEventListener('click', this.clickBidak.bind(this), false);
@@ -30,8 +30,4 @@ class Pion extends ClassBidak {
 
     }
 
-    getLegalMove () {
-
-    }
-
-} export {Pion};
+}
