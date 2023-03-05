@@ -24,7 +24,7 @@ class ClassBidak {
         this.element.style.backgroundRepeat = "no-repeat";
         this.element.style.zIndex = "1";
         papanCatur.appendChild(this.element);
-
+        px
     }
 
     // Method untuk menggerakan bidak
