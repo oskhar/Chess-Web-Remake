@@ -33,3 +33,6 @@ export class Pion extends ClassBidak {
     }
 
 }
+
+// Class
+export class Raja extends
