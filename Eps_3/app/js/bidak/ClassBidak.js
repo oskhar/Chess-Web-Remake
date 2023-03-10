@@ -70,4 +70,23 @@ export class ClassBidak {
 
     }
 
+    // Method
+    getLegalMove (arr) {
+
+        this.tmp = [];
+        arr.forEach(el => {
+            this.tmp.push([el[0] * this.area, el[1] * this.area])
+        });
+        return tmp;
+
+    }
+
+    // Method
+
+    loadData (data) {
+
+        this.data = data;
+
+    }
+
 }

@@ -12,8 +12,7 @@ export class Pion extends ClassBidak {
 
         // Atribute
         this.first = true;
-        this.type_x = 0;
-        this.type_y = 1;
+        this.legal_move = [];
 
         this.element.addEventListener("click", this.click.bind(this))
 
@@ -22,8 +21,11 @@ export class Pion extends ClassBidak {
     // Method
     click () {
 
+        // Bersihkan permukaan
         this.hapusPermukaan();
-        console.log(this.y - this.area * this.type_y);
+
+        // Seleksi legal_move
+        if () {}
         this.areaGerak(this.x - this.area * this.type_x, this.y - this.area * this.type_y);
         if (this.first) {
             this.areaGerak(this.x - this.area * this.type_x, this.y - this.area * (this.type_y+1));
@@ -35,4 +37,6 @@ export class Pion extends ClassBidak {
 }
 
 // Class
-export class Raja extends
+export class Raja extends ClassBidak {
+
+}
