@@ -5,37 +5,58 @@ import { ClassBidak } from "./ClassBidak.js";
 export class Pion extends ClassBidak {
 
     // Constructor
-    constructor (gambar, x, y, poin, papan_catur, papan_permukaan, area) {
+    constructor (gambar, x, y, poin, papan_catur, papan_permukaan, area, pihak) {
 
         // Jalankan construct parent
-        super(gambar, x, y, poin, papan_catur, papan_permukaan, area);
+        super(gambar, x, y, poin, papan_catur, papan_permukaan, area, pihak);
 
         // Atribute
         this.first = true;
-        this.legal_move = [];
-
-        this.element.addEventListener("click", this.click.bind(this))
 
     }
 
     // Method
-    click () {
+    click (data) {
 
         // Bersihkan permukaan
-        this.hapusPermukaan();
+        this.hapus_permukaan();
 
         // Seleksi legal_move
-        // if () {}
-        this.areaGerak(this.x - this.area * this.type_x, this.y - this.area * this.type_y);
-        if (this.first) {
-            this.areaGerak(this.x - this.area * this.type_x, this.y - this.area * (this.type_y+1));
-            this.first = false;
+        this.lmove = this.legal_move(data);
+        for (let i = 0; i < this.lmove.length; i++) {
+            this.area_gerak(this.x + this.lmove[i][0], this.y + this.lmove[i][1], true);
+            
         }
 
     }
 
     // Method
-    legal_move
+    legal_move (data) {
+
+        this.lmove = [];
+        if (this.y-1 != -1) {
+
+            if (data[this.y-1][this.x] == "x") {
+
+                this.lmove.push([0, -1]);
+
+                if (this.first && data[this.y-2][this.x] == "x") {
+                    this.lmove.push([0, -2]);
+                }
+
+            }
+            if (this.x-1 != -1)
+                if (data[this.y-1][this.x-1].substring(1) == "hitam") 
+                    this.lmove.push([-1, -1]);
+            if (this.x+1 != 8)
+                if (data[this.y-1][this.x+1].substring(1) == "hitam") 
+                    this.lmove.push([1, -1]);
+            
+        }
+
+        return this.lmove;
+
+    }
 
 }
 

@@ -1,38 +1,92 @@
 import { Pion } from "./bidak/Bidak.js";
 
-    // Atribute
-    var area = 110;
-    var papan_catur = document.getElementById("papan_catur");
-    var papan_permukaan = document.getElementById("papan_permukaan");
-    var bidakPutih = [];
+class Board {
 
-    // Bentuk papan catur
-    papan_catur.style.height = (area * 8) + "px";
-    papan_catur.style.width = (area * 8) + "px";
-    papan_permukaan.style.height = (area * 8) + "px";
-    papan_permukaan.style.width = (area * 8) + "px";
+    constructor (area = 110) {
+        // Atribute
+        this.area = area;
+        this.papan_catur = document.getElementById("papan_catur");
+        this.papan_permukaan = document.getElementById("papan_permukaan");
+        this.bidak = [[], [], [], []];
 
-    // Gambar area
-    for (let i = 0; i < 8; i++) {
-        for (let j = 0; j < 8; j++) {
+        // Bentuk papan catur
+        this.papan_catur.style.height = (this.area * 8) + "px";
+        this.papan_catur.style.width = (this.area * 8) + "px";
+        this.papan_permukaan.style.height = (this.area * 8) + "px";
+        this.papan_permukaan.style.width = (this.area * 8) + "px";
 
-            let element = document.createElement("div");
-            element.style.position = "absolute";
-            element.style.height = area + "px";
-            element.style.width = area + "px";
-            element.style.top = (i*area) + "px";
-            element.style.left = (j*area) + "px";
-            element.style.background = (i+j) % 2 == 0 ? "#f0dab5" : "#b48662";
-            papan_catur.appendChild(element);
+        this.draw_area();
+        this.tambah_bidak();
+        console.log(this.representasi_board());
 
-        }
     }
 
-    // Tambahkan bidak
-    for (let i = 0; i < 2; i++) {
-        for (let j = 0; j < 8; j++) {
-            
-            bidakPutih = new Pion("./assets/images/putih/pion.svg", j*area, (i+6)*area, 1, papan_catur, papan_permukaan, area);
+    // Method
+    draw_area() {
 
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+
+                let element = document.createElement("div");
+                element.style.position = "absolute";
+                element.style.height = this.area + "px";
+                element.style.width = this.area + "px";
+                element.style.top = (i*this.area) + "px";
+                element.style.left = (j*this.area) + "px";
+                element.style.background = (i+j) % 2 == 0 ? "#f0dab5" : "#b48662";
+                this.papan_catur.appendChild(element);
+
+            }
         }
+
     }
+
+    // Method
+    tambah_bidak() {
+
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 8; j++) {   
+
+                this.bidak[i][j] = new Pion("./assets/images/" + (i < 2 ? "hitam":"putih") + "/pion.svg", j, (i < 2 ? i:i+4), 1, this.papan_catur, this.papan_permukaan, this.area, (i < 2 ? "hitam":"putih"));
+                this.bidak[i][j].element.addEventListener("click", this.click_bidak.bind(this, i, j));
+
+            }
+        }
+
+    }
+
+    // Method
+    representasi_board() {
+
+        this.rboard = [
+            ["x", "x", "x", "x", "x", "x", "x", "x"],
+            ["x", "x", "x", "x", "x", "x", "x", "x"],
+            ["x", "x", "x", "x", "x", "x", "x", "x"],
+            ["x", "x", "x", "x", "x", "x", "x", "x"],
+            ["x", "x", "x", "x", "x", "x", "x", "x"],
+            ["x", "x", "x", "x", "x", "x", "x", "x"],
+            ["x", "x", "x", "x", "x", "x", "x", "x"],
+            ["x", "x", "x", "x", "x", "x", "x", "x"]
+        ];
+
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 8; j++) {
+
+                this.rboard[this.bidak[i][j].y][this.bidak[i][j].x] = this.bidak[i][j].poin + this.bidak[i][j].pihak;
+                
+            }
+        }
+        
+        return this.rboard;
+
+    }
+
+    // Method
+    click_bidak(i, j) {
+
+        this.data = this.representasi_board();
+        this.bidak[i][j].click(this.data);
+
+    }
+
+} const run = new Board();
