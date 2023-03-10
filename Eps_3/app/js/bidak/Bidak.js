@@ -25,7 +25,7 @@ export class Pion extends ClassBidak {
         this.hapusPermukaan();
 
         // Seleksi legal_move
-        if () {}
+        // if () {}
         this.areaGerak(this.x - this.area * this.type_x, this.y - this.area * this.type_y);
         if (this.first) {
             this.areaGerak(this.x - this.area * this.type_x, this.y - this.area * (this.type_y+1));
@@ -33,6 +33,9 @@ export class Pion extends ClassBidak {
         }
 
     }
+
+    // Method
+    legal_move
 
 }
 

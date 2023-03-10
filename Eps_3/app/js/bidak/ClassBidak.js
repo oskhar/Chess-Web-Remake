@@ -82,7 +82,6 @@ export class ClassBidak {
     }
 
     // Method
-
     loadData (data) {
 
         this.data = data;
