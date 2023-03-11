@@ -31,7 +31,7 @@ export class Pion extends ClassBidak {
     }
 
     // Method
-    legal_move (data, n = false) {
+    legal_move (data) {
 
         this.lmove = [];
         if (this.y-1 > -1) {
@@ -54,8 +54,6 @@ export class Pion extends ClassBidak {
             
         }
 
-        if (n)
-         this.lmove.push(this.nama);
         return this.lmove;
 
     }
@@ -92,7 +90,7 @@ export class Benteng extends ClassBidak {
     }
 
     // Method
-    legal_move (data, n = false) {
+    legal_move (data) {
 
         this.lmove = [];
         this.arah = [true, true, true, true]
@@ -139,8 +137,6 @@ export class Benteng extends ClassBidak {
             }
         }
 
-        if (n)
-         this.lmove.push(this.nama);
         return this.lmove;
 
     }
@@ -177,7 +173,7 @@ export class Kuda extends ClassBidak {
     }
 
     // Method
-    legal_move (data, n = false) {
+    legal_move (data) {
 
         this.lmove = [];
         if (this.y-2 > -1) {
@@ -229,8 +225,6 @@ export class Kuda extends ClassBidak {
             }
         }
 
-        if (n)
-         this.lmove.push(this.nama);
         return this.lmove;
 
     }
@@ -267,7 +261,7 @@ export class Peluncur extends ClassBidak {
     }
 
     // Method
-    legal_move (data, n = false) {
+    legal_move (data) {
 
         this.lmove = [];
         this.arah = [true, true, true, true]
@@ -315,8 +309,6 @@ export class Peluncur extends ClassBidak {
         }
 
 
-        if (n)
-         this.lmove.push(this.nama);
         return this.lmove;
 
     }
@@ -353,7 +345,7 @@ export class Ratu extends ClassBidak {
     }
 
     // Method
-    legal_move (data, n = false) {
+    legal_move (data) {
 
         this.lmove = [];
         if (this.y-1 != -1) {
@@ -376,8 +368,6 @@ export class Ratu extends ClassBidak {
             
         }
 
-        if (n)
-         this.lmove.push(this.nama);
         return this.lmove;
 
     }
@@ -414,7 +404,7 @@ export class Raja extends ClassBidak {
     }
 
     // Method
-    legal_move (data, n = false) {
+    legal_move (data) {
 
         this.lmove = [];
         if (this.y-1 != -1) {
@@ -437,8 +427,6 @@ export class Raja extends ClassBidak {
             
         }
 
-        if (n)
-         this.lmove.push(this.nama);
         return this.lmove;
 
     }

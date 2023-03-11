@@ -119,7 +119,7 @@ class Board {
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 8; j++) {
                 if (this.bidak[i][j].legal_move(this.representasi_board(), true).length != 1)
-                    this.a_lmove.push(this.bidak[i][j].legal_move(this.representasi_board(), true));
+                    this.a_lmove[this.bidak[i][j].nama] = this.bidak[i][j].legal_move(this.representasi_board(), true);
             }
         }
         return this.a_lmove;
