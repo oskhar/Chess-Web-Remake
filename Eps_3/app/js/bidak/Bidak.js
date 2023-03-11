@@ -34,23 +34,23 @@ export class Pion extends ClassBidak {
     legal_move (data) {
 
         this.lmove = [];
-        if (this.y-1 > -1) {
+        this.tmp_y = this.pihak == "p" ? -1 : 1;
+        if (this.pihak == "p" ? this.y-1 > -1 : this.y+1 < 8) {
 
-            if (data[this.y-1][this.x] == "x") {
+            if (data[this.y+this.tmp_y][this.x] == "x") {
 
-                this.lmove.push([0, -1]);
-
-                if (this.first && data[this.y-2][this.x] == "x") {
-                    this.lmove.push([0, -2]);
+                this.lmove.push([0, this.tmp_y]);
+                if (this.first && data[this.y+(2*this.tmp_y)][this.x] == "x") {
+                    this.lmove.push([0, (2*this.tmp_y)]);
                 }
 
             }
             if (this.x-1 > -1)
-                if (data[this.y-1][this.x-1].substring(1) == this.lawan) 
-                    this.lmove.push([-1, -1]);
+                if (data[this.y+this.tmp_y][this.x-1].substring(1) == this.lawan) 
+                    this.lmove.push([+this.tmp_y, +this.tmp_y]);
             if (this.x+1 < 8)
-                if (data[this.y-1][this.x+1].substring(1) == this.lawan) 
-                    this.lmove.push([1, -1]);
+                if (data[this.y+this.tmp_y][this.x+1].substring(1) == this.lawan) 
+                    this.lmove.push([1, +this.tmp_y]);
             
         }
 

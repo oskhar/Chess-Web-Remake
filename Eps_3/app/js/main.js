@@ -131,4 +131,27 @@ class Board {
         return this.a_lmove;
     }
 
+    // Method
+    search_bidak (value, arr) {
+
+        // fungsi rekursif tail
+        function search(arr, i) {
+            if (i >= arr.length) {
+                return false;
+            }
+            const element = arr[i];
+            
+            if (typeof element === 'string' && element === value) {
+                return true;
+            }
+            
+            if (Array.isArray(element)) {
+                return search(element, 0) || search(arr, i + 1);
+            }
+            return search(arr, i + 1);
+        }
+        
+        return search(arr, 0);
+    }
+
 } const run = new Board();
