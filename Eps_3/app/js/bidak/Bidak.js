@@ -46,10 +46,10 @@ export class Pion extends ClassBidak {
 
             }
             if (this.x-1 > -1)
-                if (data[this.y-1][this.x-1].substring(1) == "hitam") 
+                if (data[this.y-1][this.x-1].substring(1) == this.lawan) 
                     this.lmove.push([-1, -1]);
             if (this.x+1 < 8)
-                if (data[this.y-1][this.x+1].substring(1) == "hitam") 
+                if (data[this.y-1][this.x+1].substring(1) == this.lawan) 
                     this.lmove.push([1, -1]);
             
         }
@@ -93,12 +93,12 @@ export class Benteng extends ClassBidak {
     legal_move (data) {
 
         this.lmove = [];
-        this.arah = [true, true, true, true]
+        this.arah = [true, true, true, true];
         for (let i = 1; i < 8; i++) {
             if (this.y-i > -1 && this.arah[0]) {
                 if (data[this.y-i][this.x] == "x") {
                     this.lmove.push([0, -i]);
-                } else if (data[this.y-i][this.x].substring(1) == "hitam") {
+                } else if (data[this.y-i][this.x].substring(1) == this.lawan) {
                     this.lmove.push([0, -i]);
                     this.arah[0] = false;
                 } else {
@@ -108,7 +108,7 @@ export class Benteng extends ClassBidak {
             if (this.y+i < 8 && this.arah[1]) {
                 if (data[this.y+i][this.x] == "x") {
                     this.lmove.push([0, i]);
-                } else if (data[this.y+i][this.x].substring(1) == "hitam") {
+                } else if (data[this.y+i][this.x].substring(1) == this.lawan) {
                     this.lmove.push([0, i]);
                     this.arah[1] = false;
                 } else {
@@ -118,7 +118,7 @@ export class Benteng extends ClassBidak {
             if (this.x-i > -1 && this.arah[2]) {
                 if (data[this.y][this.x-i] == "x") {
                     this.lmove.push([-i, 0]);
-                } else if (data[this.y][this.x-i].substring(1) == "hitam") {
+                } else if (data[this.y][this.x-i].substring(1) == this.lawan) {
                     this.lmove.push([-i, 0]);
                     this.arah[2] = false;
                 } else {
@@ -128,7 +128,7 @@ export class Benteng extends ClassBidak {
             if (this.x+i < 8 && this.arah[3]) {
                 if (data[this.y][this.x+i] == "x") {
                     this.lmove.push([i, 0]);
-                } else if (data[this.y][this.x+i].substring(1) == "hitam") {
+                } else if (data[this.y][this.x+i].substring(1) == this.lawan) {
                     this.lmove.push([i, 0]);
                     this.arah[3] = false;
                 } else {
@@ -264,43 +264,43 @@ export class Peluncur extends ClassBidak {
     legal_move (data) {
 
         this.lmove = [];
-        this.arah = [true, true, true, true]
+        this.arah = [true, true, true, true];
         for (let i = 1; i < 8; i++) {
-            if (this.y-i > -1 && this.arah[0]) {
-                if (data[this.y-i][this.x] == "x") {
-                    this.lmove.push([0, -i]);
-                } else if (data[this.y-i][this.x].substring(1) == "hitam") {
-                    this.lmove.push([0, -i]);
+            if (this.y-i > -1 && this.x-i > -1 && this.arah[0]) {
+                if (data[this.y-i][this.x-i] == "x") {
+                    this.lmove.push([-i, -i]);
+                } else if (data[this.y-i][this.x-i].substring(1) == this.lawan) {
+                    this.lmove.push([-i, -i]);
                     this.arah[0] = false;
                 } else {
                     this.arah[0] = false;
                 }
             }
-            if (this.y+i < 8 && this.arah[1]) {
-                if (data[this.y+i][this.x] == "x") {
-                    this.lmove.push([0, i]);
-                } else if (data[this.y+i][this.x].substring(1) == "hitam") {
-                    this.lmove.push([0, i]);
+            if (this.y+i < 8 && this.x-i > -1 && this.arah[1]) {
+                if (data[this.y+i][this.x-i] == "x") {
+                    this.lmove.push([-i, i]);
+                } else if (data[this.y+i][this.x-i].substring(1) == this.lawan) {
+                    this.lmove.push([-i, i]);
                     this.arah[1] = false;
                 } else {
                     this.arah[1] = false;
                 }
             }
-            if (this.x-i > -1 && this.arah[2]) {
-                if (data[this.y][this.x-i] == "x") {
-                    this.lmove.push([-i, 0]);
-                } else if (data[this.y][this.x-i].substring(1) == "hitam") {
-                    this.lmove.push([-i, 0]);
+            if (this.y-i > -1 && this.x+i < 8 && this.arah[2]) {
+                if (data[this.y-i][this.x+i] == "x") {
+                    this.lmove.push([i, -i]);
+                } else if (data[this.y-i][this.x+i].substring(1) == this.lawan) {
+                    this.lmove.push([i, -i]);
                     this.arah[2] = false;
                 } else {
                     this.arah[2] = false;
                 }
             }
-            if (this.x+i < 8 && this.arah[3]) {
-                if (data[this.y][this.x+i] == "x") {
-                    this.lmove.push([i, 0]);
-                } else if (data[this.y][this.x+i].substring(1) == "hitam") {
-                    this.lmove.push([i, 0]);
+            if (this.y+i < 8 && this.x+i < 8 && this.arah[3]) {
+                if (data[this.y+i][this.x+i] == "x") {
+                    this.lmove.push([i, i]);
+                } else if (data[this.y+i][this.x+i].substring(1) == this.lawan) {
+                    this.lmove.push([i, i]);
                     this.arah[3] = false;
                 } else {
                     this.arah[3] = false;
@@ -348,24 +348,48 @@ export class Ratu extends ClassBidak {
     legal_move (data) {
 
         this.lmove = [];
-        if (this.y-1 != -1) {
-
-            if (data[this.y-1][this.x] == "x") {
-
-                this.lmove.push([0, -1]);
-
-                if (this.first && data[this.y-2][this.x] == "x") {
-                    this.lmove.push([0, -2]);
+        this.arah = [true, true, true, true, true, true, true, true];
+        for (let i = 1; i < 8; i++) {
+            if (this.y-i > -1 && this.x-i > -1 && this.arah[0]) {
+                if (data[this.y-i][this.x-i] == "x") {
+                    this.lmove.push([-i, -i]);
+                } else if (data[this.y-i][this.x-i].substring(1) == this.lawan) {
+                    this.lmove.push([-i, -i]);
+                    this.arah[0] = false;
+                } else {
+                    this.arah[0] = false;
                 }
-
             }
-            if (this.x-1 != -1)
-                if (data[this.y-1][this.x-1].substring(1) == "hitam") 
-                    this.lmove.push([-1, -1]);
-            if (this.x+1 != 8)
-                if (data[this.y-1][this.x+1].substring(1) == "hitam") 
-                    this.lmove.push([1, -1]);
-            
+            if (this.y+i < 8 && this.x-i > -1 && this.arah[1]) {
+                if (data[this.y+i][this.x-i] == "x") {
+                    this.lmove.push([-i, i]);
+                } else if (data[this.y+i][this.x-i].substring(1) == this.lawan) {
+                    this.lmove.push([-i, i]);
+                    this.arah[1] = false;
+                } else {
+                    this.arah[1] = false;
+                }
+            }
+            if (this.y-i > -1 && this.x+i < 8 && this.arah[2]) {
+                if (data[this.y-i][this.x+i] == "x") {
+                    this.lmove.push([i, -i]);
+                } else if (data[this.y-i][this.x+i].substring(1) == this.lawan) {
+                    this.lmove.push([i, -i]);
+                    this.arah[2] = false;
+                } else {
+                    this.arah[2] = false;
+                }
+            }
+            if (this.y+i < 8 && this.x+i < 8 && this.arah[3]) {
+                if (data[this.y+i][this.x+i] == "x") {
+                    this.lmove.push([i, i]);
+                } else if (data[this.y+i][this.x+i].substring(1) == this.lawan) {
+                    this.lmove.push([i, i]);
+                    this.arah[3] = false;
+                } else {
+                    this.arah[3] = false;
+                }
+            }
         }
 
         return this.lmove;
@@ -419,10 +443,10 @@ export class Raja extends ClassBidak {
 
             }
             if (this.x-1 != -1)
-                if (data[this.y-1][this.x-1].substring(1) == "hitam") 
+                if (data[this.y-1][this.x-1].substring(1) == this.lawan) 
                     this.lmove.push([-1, -1]);
             if (this.x+1 != 8)
-                if (data[this.y-1][this.x+1].substring(1) == "hitam") 
+                if (data[this.y-1][this.x+1].substring(1) == this.lawan) 
                     this.lmove.push([1, -1]);
             
         }

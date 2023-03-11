@@ -10,6 +10,7 @@ export class ClassBidak {
         this.poin = poin;
         this.nama = nama;
         this.pihak = pihak;
+        this.lawan = pihak == "p" ? "h" : "p";
         this.papan_catur = papan_catur;
         this.papan_permukaan = papan_permukaan;
         this.area = area;
@@ -75,6 +76,12 @@ export class ClassBidak {
     // Method
     death () {
         this.element.remove();
+
+    }
+
+    // Method
+    position_str () {
+        return String.fromCharCode(97+this.x) + this.y;
 
     }
 

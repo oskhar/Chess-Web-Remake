@@ -9,10 +9,10 @@ class Board {
         this.papan_catur = document.getElementById("papan_catur");
         this.papan_permukaan = document.getElementById("papan_permukaan");
         this.bidak = [
-            ["5benteng", "3kuda", "3peluncur", "9ratu", "0raja", "3peluncur", "3kuda", "5benteng"],
-            ["1pion", "1pion", "1pion", "1pion", "1pion", "1pion", "1pion", "1pion"],
-            ["1pion", "1pion", "1pion", "1pion", "1pion", "1pion", "1pion", "1pion"],
-            ["5benteng", "3kuda", "3peluncur", "9ratu", "0raja", "3peluncur", "3kuda", "5benteng"]
+            ["5b", "3k", "3g", "9q", "0r", "3g", "3k", "5b"],
+            ["1p", "1p", "1p", "1p", "1p", "1p", "1p", "1p"],
+            ["1p", "1p", "1p", "1p", "1p", "1p", "1p", "1p"],
+            ["5b", "3k", "3g", "9q", "0r", "3g", "3k", "5b"]
         ];
 
         // Bentuk papan catur
@@ -28,7 +28,7 @@ class Board {
     }
 
     // Method
-    draw_area() {
+    draw_area () {
 
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
@@ -48,28 +48,28 @@ class Board {
     }
 
     // Method
-    tambah_bidak() {
+    tambah_bidak () {
 
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 8; j++) {   
 
-                if (this.bidak[i][j].substring(1) == "pion")
-                    this.bidak[i][j] = new Pion("./assets/images/" + (i < 2 ? "hitam":"putih") + "/" + this.bidak[i][j].substring(1) + ".svg", j, (i < 2 ? i:i+4), parseInt(this.bidak[i][j][0]), this.papan_catur, this.papan_permukaan, this.area, (i < 2 ? "hitam":"putih"), "pion");
+                if (this.bidak[i][j].substring(1) == "p")
+                    this.bidak[i][j] = new Pion("./assets/images/" + (i < 2 ? "hitam":"putih") + "/" + this.bidak[i][j].substring(1) + ".svg", j, (i < 2 ? i:i+4), parseInt(this.bidak[i][j][0]), this.papan_catur, this.papan_permukaan, this.area, (i < 2 ? 'h':'p'), "p");
 
-                else if (this.bidak[i][j].substring(1) == "benteng")
-                    this.bidak[i][j] = new Benteng("./assets/images/" + (i < 2 ? "hitam":"putih") + "/" + this.bidak[i][j].substring(1) + ".svg", j, (i < 2 ? i:i+4), parseInt(this.bidak[i][j][0]), this.papan_catur, this.papan_permukaan, this.area, (i < 2 ? "hitam":"putih"), "benteng");
+                else if (this.bidak[i][j].substring(1) == "b")
+                    this.bidak[i][j] = new Benteng("./assets/images/" + (i < 2 ? "hitam":"putih") + "/" + this.bidak[i][j].substring(1) + ".svg", j, (i < 2 ? i:i+4), parseInt(this.bidak[i][j][0]), this.papan_catur, this.papan_permukaan, this.area, (i < 2 ? 'h':'p'), "b");
 
-                else if (this.bidak[i][j].substring(1) == "kuda")
-                    this.bidak[i][j] = new Kuda("./assets/images/" + (i < 2 ? "hitam":"putih") + "/" + this.bidak[i][j].substring(1) + ".svg", j, (i < 2 ? i:i+4), parseInt(this.bidak[i][j][0]), this.papan_catur, this.papan_permukaan, this.area, (i < 2 ? "hitam":"putih"), "kuda");
+                else if (this.bidak[i][j].substring(1) == "k")
+                    this.bidak[i][j] = new Kuda("./assets/images/" + (i < 2 ? "hitam":"putih") + "/" + this.bidak[i][j].substring(1) + ".svg", j, (i < 2 ? i:i+4), parseInt(this.bidak[i][j][0]), this.papan_catur, this.papan_permukaan, this.area, (i < 2 ? 'h':'p'), "k");
 
-                else if (this.bidak[i][j].substring(1) == "peluncur")
-                    this.bidak[i][j] = new Peluncur("./assets/images/" + (i < 2 ? "hitam":"putih") + "/" + this.bidak[i][j].substring(1) + ".svg", j, (i < 2 ? i:i+4), parseInt(this.bidak[i][j][0]), this.papan_catur, this.papan_permukaan, this.area, (i < 2 ? "hitam":"putih"), "peluncur");
+                else if (this.bidak[i][j].substring(1) == "g")
+                    this.bidak[i][j] = new Peluncur("./assets/images/" + (i < 2 ? "hitam":"putih") + "/" + this.bidak[i][j].substring(1) + ".svg", j, (i < 2 ? i:i+4), parseInt(this.bidak[i][j][0]), this.papan_catur, this.papan_permukaan, this.area, (i < 2 ? 'h':'p'), "g");
 
-                else if (this.bidak[i][j].substring(1) == "ratu")
-                    this.bidak[i][j] = new Ratu("./assets/images/" + (i < 2 ? "hitam":"putih") + "/" + this.bidak[i][j].substring(1) + ".svg", j, (i < 2 ? i:i+4), parseInt(this.bidak[i][j][0]), this.papan_catur, this.papan_permukaan, this.area, (i < 2 ? "hitam":"putih"), "ratu");
+                else if (this.bidak[i][j].substring(1) == "q")
+                    this.bidak[i][j] = new Ratu("./assets/images/" + (i < 2 ? "hitam":"putih") + "/" + this.bidak[i][j].substring(1) + ".svg", j, (i < 2 ? i:i+4), parseInt(this.bidak[i][j][0]), this.papan_catur, this.papan_permukaan, this.area, (i < 2 ? 'h':'p'), "q");
 
-                else if (this.bidak[i][j].substring(1) == "raja")
-                    this.bidak[i][j] = new Raja("./assets/images/" + (i < 2 ? "hitam":"putih") + "/" + this.bidak[i][j].substring(1) + ".svg", j, (i < 2 ? i:i+4), parseInt(this.bidak[i][j][0]), this.papan_catur, this.papan_permukaan, this.area, (i < 2 ? "hitam":"putih"), "raja");
+                else if (this.bidak[i][j].substring(1) == "r")
+                    this.bidak[i][j] = new Raja("./assets/images/" + (i < 2 ? "hitam":"putih") + "/" + this.bidak[i][j].substring(1) + ".svg", j, (i < 2 ? i:i+4), parseInt(this.bidak[i][j][0]), this.papan_catur, this.papan_permukaan, this.area, (i < 2 ? 'h':'p'), "r");
 
                 this.bidak[i][j].element.addEventListener("click", this.click_bidak.bind(this, i, j));
 
@@ -79,7 +79,7 @@ class Board {
     }
 
     // Method
-    representasi_board() {
+    representasi_board () {
 
         this.rboard = [
             ["x", "x", "x", "x", "x", "x", "x", "x"],
@@ -105,7 +105,7 @@ class Board {
     }
 
     // Method
-    click_bidak(i, j) {
+    click_bidak (i, j) {
 
         this.data = this.representasi_board();
         this.bidak[i][j].click(this.data);
@@ -113,13 +113,19 @@ class Board {
     }
 
     // Method
-    all_legal_move() {
+    all_legal_move () {
 
         this.a_lmove = [];
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 8; j++) {
-                if (this.bidak[i][j].legal_move(this.representasi_board(), true).length != 1)
-                    this.a_lmove[this.bidak[i][j].nama] = this.bidak[i][j].legal_move(this.representasi_board(), true);
+                if (this.bidak[i][j].legal_move(this.representasi_board()).length > 0) {
+                    this.tmp = [];
+                    this.tmp.push(this.bidak[i][j].position_str());
+                    this.tmp.push(this.bidak[i][j].nama);
+                    this.tmp.push(this.bidak[i][j].pihak);
+                    this.tmp.push(this.bidak[i][j].legal_move(this.representasi_board()));
+                    this.a_lmove.push(this.tmp);
+                }
             }
         }
         return this.a_lmove;
