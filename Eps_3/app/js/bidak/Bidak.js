@@ -5,28 +5,13 @@ import { ClassBidak } from "./ClassBidak.js";
 export class Pion extends ClassBidak {
 
     // Constructor
-    constructor (gambar, x, y, poin, papan_catur, papan_permukaan, area, pihak, nama) {
+    constructor (gambar, x, y, poin, papan_catur, area, pihak, nama, i) {
 
         // Jalankan construct parent
-        super(gambar, x, y, poin, papan_catur, papan_permukaan, area, pihak, nama);
+        super(gambar, x, y, poin, papan_catur, area, pihak, nama, i);
 
         // Atribute
         this.first = true;
-
-    }
-
-    // Method
-    click (data) {
-
-        // Bersihkan permukaan
-        this.hapus_permukaan();
-
-        // Seleksi legal_move
-        this.lmove = this.legal_move(data);
-        for (let i = 0; i < this.lmove.length; i++) {
-            this.area_gerak(this.x + this.lmove[i][0], this.y + this.lmove[i][1], true);
-            
-        }
 
     }
 
@@ -46,11 +31,11 @@ export class Pion extends ClassBidak {
 
             }
             if (this.x-1 > -1)
-                if (data[this.y+this.tmp_y][this.x-1].substring(1) == this.lawan) 
-                    this.lmove.push([+this.tmp_y, +this.tmp_y]);
+                if (data[this.y+this.tmp_y][this.x-1][0] == this.lawan) 
+                    this.lmove.push([-1, this.tmp_y]);
             if (this.x+1 < 8)
-                if (data[this.y+this.tmp_y][this.x+1].substring(1) == this.lawan) 
-                    this.lmove.push([1, +this.tmp_y]);
+                if (data[this.y+this.tmp_y][this.x+1][0] == this.lawan) 
+                    this.lmove.push([1, this.tmp_y]);
             
         }
 
@@ -64,28 +49,13 @@ export class Pion extends ClassBidak {
 export class Benteng extends ClassBidak {
 
     // Constructor
-    constructor (gambar, x, y, poin, papan_catur, papan_permukaan, area, pihak, nama) {
+    constructor (gambar, x, y, poin, papan_catur, area, pihak, nama, i) {
 
         // Jalankan construct parent
-        super(gambar, x, y, poin, papan_catur, papan_permukaan, area, pihak, nama);
+        super(gambar, x, y, poin, papan_catur, area, pihak, nama, i);
 
         // Atribute
         this.first = true;
-
-    }
-
-    // Method
-    click (data) {
-
-        // Bersihkan permukaan
-        this.hapus_permukaan();
-
-        // Seleksi legal_move
-        this.lmove = this.legal_move(data);
-        for (let i = 0; i < this.lmove.length; i++) {
-            this.area_gerak(this.x + this.lmove[i][0], this.y + this.lmove[i][1], true);
-            
-        }
 
     }
 
@@ -98,7 +68,7 @@ export class Benteng extends ClassBidak {
             if (this.y-i > -1 && this.arah[0]) {
                 if (data[this.y-i][this.x] == "x") {
                     this.lmove.push([0, -i]);
-                } else if (data[this.y-i][this.x].substring(1) == this.lawan) {
+                } else if (data[this.y-i][this.x][0] == this.lawan) {
                     this.lmove.push([0, -i]);
                     this.arah[0] = false;
                 } else {
@@ -108,7 +78,7 @@ export class Benteng extends ClassBidak {
             if (this.y+i < 8 && this.arah[1]) {
                 if (data[this.y+i][this.x] == "x") {
                     this.lmove.push([0, i]);
-                } else if (data[this.y+i][this.x].substring(1) == this.lawan) {
+                } else if (data[this.y+i][this.x][0] == this.lawan) {
                     this.lmove.push([0, i]);
                     this.arah[1] = false;
                 } else {
@@ -118,7 +88,7 @@ export class Benteng extends ClassBidak {
             if (this.x-i > -1 && this.arah[2]) {
                 if (data[this.y][this.x-i] == "x") {
                     this.lmove.push([-i, 0]);
-                } else if (data[this.y][this.x-i].substring(1) == this.lawan) {
+                } else if (data[this.y][this.x-i][0] == this.lawan) {
                     this.lmove.push([-i, 0]);
                     this.arah[2] = false;
                 } else {
@@ -128,7 +98,7 @@ export class Benteng extends ClassBidak {
             if (this.x+i < 8 && this.arah[3]) {
                 if (data[this.y][this.x+i] == "x") {
                     this.lmove.push([i, 0]);
-                } else if (data[this.y][this.x+i].substring(1) == this.lawan) {
+                } else if (data[this.y][this.x+i][0] == this.lawan) {
                     this.lmove.push([i, 0]);
                     this.arah[3] = false;
                 } else {
@@ -147,28 +117,13 @@ export class Benteng extends ClassBidak {
 export class Kuda extends ClassBidak {
 
     // Constructor
-    constructor (gambar, x, y, poin, papan_catur, papan_permukaan, area, pihak, nama) {
+    constructor (gambar, x, y, poin, papan_catur, area, pihak, nama, i) {
 
         // Jalankan construct parent
-        super(gambar, x, y, poin, papan_catur, papan_permukaan, area, pihak, nama);
+        super(gambar, x, y, poin, papan_catur, area, pihak, nama, i);
 
         // Atribute
         this.first = true;
-
-    }
-
-    // Method
-    click (data) {
-
-        // Bersihkan permukaan
-        this.hapus_permukaan();
-
-        // Seleksi legal_move
-        this.lmove = this.legal_move(data);
-        for (let i = 0; i < this.lmove.length; i++) {
-            this.area_gerak(this.x + this.lmove[i][0], this.y + this.lmove[i][1], true);
-            
-        }
 
     }
 
@@ -178,48 +133,48 @@ export class Kuda extends ClassBidak {
         this.lmove = [];
         if (this.y-2 > -1) {
             if (this.x-1 > -1) {
-                if (data[this.y-2][this.x-1].substring(1) != this.pihak) {
+                if (data[this.y-2][this.x-1][0] != this.pihak) {
                     this.lmove.push([-1, -2]);
                 }
             }
             if (this.x+1 < 8) {
-                if (data[this.y-2][this.x+1].substring(1) != this.pihak) {
+                if (data[this.y-2][this.x+1][0] != this.pihak) {
                     this.lmove.push([1, -2]);
                 }
             }
         }
         if (this.y+2 < 8) {
             if (this.x-1 > -1) {
-                if (data[this.y+2][this.x-1].substring(1) != this.pihak) {
+                if (data[this.y+2][this.x-1][0] != this.pihak) {
                     this.lmove.push([-1, 2]);
                 }
             }
             if (this.x+1 < 8) {
-                if (data[this.y+2][this.x+1].substring(1) != this.pihak) {
+                if (data[this.y+2][this.x+1][0] != this.pihak) {
                     this.lmove.push([1, 2]);
                 }
             }
         }
         if (this.x-2 > -1) {
             if (this.y-1 > -1) {
-                if (data[this.y-1][this.x-2].substring(1) != this.pihak) {
+                if (data[this.y-1][this.x-2][0] != this.pihak) {
                     this.lmove.push([-2, -1]);
                 }
             }
             if (this.y+1 < 8) {
-                if (data[this.y+1][this.x-2].substring(1) != this.pihak) {
+                if (data[this.y+1][this.x-2][0] != this.pihak) {
                     this.lmove.push([-2, 1]);
                 }
             }
         }
         if (this.x+2 < 8) {
             if (this.y-1 > -1) {
-                if (data[this.y-1][this.x+2].substring(1) != this.pihak) {
+                if (data[this.y-1][this.x+2][0] != this.pihak) {
                     this.lmove.push([2, -1]);
                 }
             }
             if (this.y+1 < 8) {
-                if (data[this.y+1][this.x+2].substring(1) != this.pihak) {
+                if (data[this.y+1][this.x+2][0] != this.pihak) {
                     this.lmove.push([2, 1]);
                 }
             }
@@ -235,28 +190,13 @@ export class Kuda extends ClassBidak {
 export class Peluncur extends ClassBidak {
 
     // Constructor
-    constructor (gambar, x, y, poin, papan_catur, papan_permukaan, area, pihak, nama) {
+    constructor (gambar, x, y, poin, papan_catur, area, pihak, nama, i) {
 
         // Jalankan construct parent
-        super(gambar, x, y, poin, papan_catur, papan_permukaan, area, pihak, nama);
+        super(gambar, x, y, poin, papan_catur, area, pihak, nama, i);
 
         // Atribute
         this.first = true;
-
-    }
-
-    // Method
-    click (data) {
-
-        // Bersihkan permukaan
-        this.hapus_permukaan();
-
-        // Seleksi legal_move
-        this.lmove = this.legal_move(data);
-        for (let i = 0; i < this.lmove.length; i++) {
-            this.area_gerak(this.x + this.lmove[i][0], this.y + this.lmove[i][1], true);
-            
-        }
 
     }
 
@@ -269,7 +209,7 @@ export class Peluncur extends ClassBidak {
             if (this.y-i > -1 && this.x-i > -1 && this.arah[0]) {
                 if (data[this.y-i][this.x-i] == "x") {
                     this.lmove.push([-i, -i]);
-                } else if (data[this.y-i][this.x-i].substring(1) == this.lawan) {
+                } else if (data[this.y-i][this.x-i][0] == this.lawan) {
                     this.lmove.push([-i, -i]);
                     this.arah[0] = false;
                 } else {
@@ -279,7 +219,7 @@ export class Peluncur extends ClassBidak {
             if (this.y+i < 8 && this.x-i > -1 && this.arah[1]) {
                 if (data[this.y+i][this.x-i] == "x") {
                     this.lmove.push([-i, i]);
-                } else if (data[this.y+i][this.x-i].substring(1) == this.lawan) {
+                } else if (data[this.y+i][this.x-i][0] == this.lawan) {
                     this.lmove.push([-i, i]);
                     this.arah[1] = false;
                 } else {
@@ -289,7 +229,7 @@ export class Peluncur extends ClassBidak {
             if (this.y-i > -1 && this.x+i < 8 && this.arah[2]) {
                 if (data[this.y-i][this.x+i] == "x") {
                     this.lmove.push([i, -i]);
-                } else if (data[this.y-i][this.x+i].substring(1) == this.lawan) {
+                } else if (data[this.y-i][this.x+i][0] == this.lawan) {
                     this.lmove.push([i, -i]);
                     this.arah[2] = false;
                 } else {
@@ -299,7 +239,7 @@ export class Peluncur extends ClassBidak {
             if (this.y+i < 8 && this.x+i < 8 && this.arah[3]) {
                 if (data[this.y+i][this.x+i] == "x") {
                     this.lmove.push([i, i]);
-                } else if (data[this.y+i][this.x+i].substring(1) == this.lawan) {
+                } else if (data[this.y+i][this.x+i][0] == this.lawan) {
                     this.lmove.push([i, i]);
                     this.arah[3] = false;
                 } else {
@@ -307,7 +247,6 @@ export class Peluncur extends ClassBidak {
                 }
             }
         }
-
 
         return this.lmove;
 
@@ -319,28 +258,13 @@ export class Peluncur extends ClassBidak {
 export class Ratu extends ClassBidak {
 
     // Constructor
-    constructor (gambar, x, y, poin, papan_catur, papan_permukaan, area, pihak, nama) {
+    constructor (gambar, x, y, poin, papan_catur, area, pihak, nama, i) {
 
         // Jalankan construct parent
-        super(gambar, x, y, poin, papan_catur, papan_permukaan, area, pihak, nama);
+        super(gambar, x, y, poin, papan_catur, area, pihak, nama, i);
 
         // Atribute
         this.first = true;
-
-    }
-
-    // Method
-    click (data) {
-
-        // Bersihkan permukaan
-        this.hapus_permukaan();
-
-        // Seleksi legal_move
-        this.lmove = this.legal_move(data);
-        for (let i = 0; i < this.lmove.length; i++) {
-            this.area_gerak(this.x + this.lmove[i][0], this.y + this.lmove[i][1], true);
-            
-        }
 
     }
 
@@ -353,7 +277,7 @@ export class Ratu extends ClassBidak {
             if (this.y-i > -1 && this.x-i > -1 && this.arah[0]) {
                 if (data[this.y-i][this.x-i] == "x") {
                     this.lmove.push([-i, -i]);
-                } else if (data[this.y-i][this.x-i].substring(1) == this.lawan) {
+                } else if (data[this.y-i][this.x-i][0] == this.lawan) {
                     this.lmove.push([-i, -i]);
                     this.arah[0] = false;
                 } else {
@@ -363,7 +287,7 @@ export class Ratu extends ClassBidak {
             if (this.y+i < 8 && this.x-i > -1 && this.arah[1]) {
                 if (data[this.y+i][this.x-i] == "x") {
                     this.lmove.push([-i, i]);
-                } else if (data[this.y+i][this.x-i].substring(1) == this.lawan) {
+                } else if (data[this.y+i][this.x-i][0] == this.lawan) {
                     this.lmove.push([-i, i]);
                     this.arah[1] = false;
                 } else {
@@ -373,7 +297,7 @@ export class Ratu extends ClassBidak {
             if (this.y-i > -1 && this.x+i < 8 && this.arah[2]) {
                 if (data[this.y-i][this.x+i] == "x") {
                     this.lmove.push([i, -i]);
-                } else if (data[this.y-i][this.x+i].substring(1) == this.lawan) {
+                } else if (data[this.y-i][this.x+i][0] == this.lawan) {
                     this.lmove.push([i, -i]);
                     this.arah[2] = false;
                 } else {
@@ -383,7 +307,7 @@ export class Ratu extends ClassBidak {
             if (this.y+i < 8 && this.x+i < 8 && this.arah[3]) {
                 if (data[this.y+i][this.x+i] == "x") {
                     this.lmove.push([i, i]);
-                } else if (data[this.y+i][this.x+i].substring(1) == this.lawan) {
+                } else if (data[this.y+i][this.x+i][0] == this.lawan) {
                     this.lmove.push([i, i]);
                     this.arah[3] = false;
                 } else {
@@ -393,7 +317,7 @@ export class Ratu extends ClassBidak {
             if (this.y-i > -1 && this.arah[4]) {
                 if (data[this.y-i][this.x] == "x") {
                     this.lmove.push([0, -i]);
-                } else if (data[this.y-i][this.x].substring(1) == this.lawan) {
+                } else if (data[this.y-i][this.x][0] == this.lawan) {
                     this.lmove.push([0, -i]);
                     this.arah[4] = false;
                 } else {
@@ -403,7 +327,7 @@ export class Ratu extends ClassBidak {
             if (this.y+i < 8 && this.arah[5]) {
                 if (data[this.y+i][this.x] == "x") {
                     this.lmove.push([0, i]);
-                } else if (data[this.y+i][this.x].substring(1) == this.lawan) {
+                } else if (data[this.y+i][this.x][0] == this.lawan) {
                     this.lmove.push([0, i]);
                     this.arah[5] = false;
                 } else {
@@ -413,7 +337,7 @@ export class Ratu extends ClassBidak {
             if (this.x-i > -1 && this.arah[6]) {
                 if (data[this.y][this.x-i] == "x") {
                     this.lmove.push([-i, 0]);
-                } else if (data[this.y][this.x-i].substring(1) == this.lawan) {
+                } else if (data[this.y][this.x-i][0] == this.lawan) {
                     this.lmove.push([-i, 0]);
                     this.arah[6] = false;
                 } else {
@@ -423,7 +347,7 @@ export class Ratu extends ClassBidak {
             if (this.x+i < 8 && this.arah[7]) {
                 if (data[this.y][this.x+i] == "x") {
                     this.lmove.push([i, 0]);
-                } else if (data[this.y][this.x+i].substring(1) == this.lawan) {
+                } else if (data[this.y][this.x+i][0] == this.lawan) {
                     this.lmove.push([i, 0]);
                     this.arah[7] = false;
                 } else {
@@ -442,28 +366,13 @@ export class Ratu extends ClassBidak {
 export class Raja extends ClassBidak {
 
     // Constructor
-    constructor (gambar, x, y, poin, papan_catur, papan_permukaan, area, pihak, nama) {
+    constructor (gambar, x, y, poin, papan_catur, area, pihak, nama, i) {
 
         // Jalankan construct parent
-        super(gambar, x, y, poin, papan_catur, papan_permukaan, area, pihak, nama);
+        super(gambar, x, y, poin, papan_catur, area, pihak, nama, i);
 
         // Atribute
         this.first = true;
-
-    }
-
-    // Method
-    click (data) {
-
-        // Bersihkan permukaan
-        this.hapus_permukaan();
-
-        // Seleksi legal_move
-        this.lmove = this.legal_move(data);
-        for (let i = 0; i < this.lmove.length; i++) {
-            this.area_gerak(this.x + this.lmove[i][0], this.y + this.lmove[i][1], true);
-            
-        }
 
     }
 
@@ -473,38 +382,38 @@ export class Raja extends ClassBidak {
         this.lmove = [];
         if (this.y-1 > -1) {
 
-            if (data[this.y-1][this.x] == "x" || data[this.y-1][this.x][1] == this.lawan)
+            if (data[this.y-1][this.x] == "x" || data[this.y-1][this.x][0] == this.lawan)
                 this.lmove.push([0, -1]);
 
             if (this.x-1 > -1)
-                if (data[this.y-1][this.x-1] == "x" || data[this.y-1][this.x-1][1] == this.lawan)
+                if (data[this.y-1][this.x-1] == "x" || data[this.y-1][this.x-1][0] == this.lawan)
                     this.lmove.push([-1, -1]);
 
             if (this.x+1 < 8)
-                if (data[this.y-1][this.x+1] == "x" || data[this.y-1][this.x+1][1] == this.lawan)
+                if (data[this.y-1][this.x+1] == "x" || data[this.y-1][this.x+1][0] == this.lawan)
                     this.lmove.push([1, -1]);
 
         }
         if (this.y+1 < 8) {
 
-            if (data[this.y+1][this.x] == "x" || data[this.y+1][this.x][1] == this.lawan)
+            if (data[this.y+1][this.x] == "x" || data[this.y+1][this.x][0] == this.lawan)
                 this.lmove.push([0, 1]);
 
             if (this.x-1 > -1)
-                if (data[this.y+1][this.x-1] == "x" || data[this.y+1][this.x-1][1] == this.lawan)
+                if (data[this.y+1][this.x-1] == "x" || data[this.y+1][this.x-1][0] == this.lawan)
                     this.lmove.push([-1, 1]);
 
             if (this.x+1 < 8)
-                if (data[this.y+1][this.x+1] == "x" || data[this.y+1][this.x+1][1] == this.lawan)
+                if (data[this.y+1][this.x+1] == "x" || data[this.y+1][this.x+1][0] == this.lawan)
                     this.lmove.push([1, 1]);
 
         }
         if (this.x+1 < 8)
-            if (data[this.y][this.x+1] == "x" || data[this.y][this.x+1][1] == this.lawan)
+            if (data[this.y][this.x+1] == "x" || data[this.y][this.x+1][0] == this.lawan)
                 this.lmove.push([1, 0]);
 
         if (this.x-1 < 8)
-            if (data[this.y][this.x-1] == "x" || data[this.y][this.x-1][1] == this.lawan)
+            if (data[this.y][this.x-1] == "x" || data[this.y][this.x-1][0] == this.lawan)
                 this.lmove.push([-1, 0]);
 
         return this.lmove;

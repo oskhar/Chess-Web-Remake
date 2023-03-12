@@ -1,3 +1,6 @@
+body {
+    background: #b48662;
+}
 #papan_catur, #papan_permukaan {
     position: absolute;
     left: 0;
