@@ -2,12 +2,11 @@
 export class ClassBidak {
 
     // Constructor
-    constructor (gambar, x, y, poin, papan_catur, area, pihak, nama, i_index) {
+    constructor (gambar, x, y, poin, papan_catur, area, pihak, nama) {
 
         // Atribute
         this.x = x;
         this.y = y;
-        this.i_index = i_index;
         this.poin = poin;
         this.nama = nama;
         this.pihak = pihak;
