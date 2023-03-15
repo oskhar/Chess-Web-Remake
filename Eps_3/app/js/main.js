@@ -21,12 +21,12 @@ class Board {
         this.papan_permukaan = document.getElementById("papan_permukaan");
         this.bidak = {
             "h": [
-                "5b", "3k", "3g", "9q", "0r", "3g", "3k", "5b",
-                "1p", "1p", "1p", "1p", "1p", "1p", "1p", "1p"
+                "5b1", "3k1", "3g1", "9q", "0r", "3g2", "3k2", "5b2",
+                "1p1", "1p2", "1p3", "1p4", "1p5", "1p6", "1p7", "1p8"
             ],
             "p": [
-                "1p", "1p", "1p", "1p", "1p", "1p", "1p", "1p",
-                "5b", "3k", "3g", "9q", "0r", "3g", "3k", "5b"
+                "1p1", "1p2", "1p3", "1p4", "1p5", "1p6", "1p7", "1p8",
+                "5b1", "3k1", "3g1", "9q", "0r", "3g2", "3k2", "5b2"
             ]
             
             };
@@ -73,18 +73,18 @@ class Board {
                 this.tmp = (i < 2) ? i : i+4;
                 this.pihak = (i < 2) ? 'h' : 'p';
                 this.index = (i < 2) ? i*8+j : (i-2)*8+j;
-                const piece = this.bidak[this.pihak][this.index][1];
+                const piece = this.bidak[this.pihak][this.index].substring(1);
                 const warna = (i < 2) ? "hitam" : "putih";
-                const path = "./assets/images/" + warna + "/" + piece + ".svg";
+                const path = "./assets/images/" + warna + "/" + piece[0] + ".svg";
 
-                this.bidak[this.pihak][piece] = new ObjectBidak[piece](
+                this.bidak[this.pihak][piece] = new ObjectBidak[piece[0]](
                     path, j, this.tmp,
                     parseInt(this.bidak[this.pihak][this.index][0]),
                     this.papan_catur,
                     this.area, this.pihak, piece
                 );
 
-                this.bidak[this.pihak][this.index].element.onclick = this.click_bidak.bind(this, this.pihak, piece);
+                this.bidak[this.pihak][piece].element.onclick = this.click_bidak.bind(this, this.pihak, piece);
 
             }
         }
@@ -110,16 +110,11 @@ class Board {
         if (this.data[y][x] != "x") {
 
             const pihak = this.data[y][x][0];
-            const index = parseInt(this.data[y][x].substring(2));
-            const arrBidak = this.bidak[pihak];
-            arrBidak[index].death();
-            arrBidak.splice(index, 1);
-            
-            for (let i = index; i < arrBidak.length; i++) {
-              const bidak = arrBidak[i];
-              bidak.i_index = i;
-              bidak.element.onclick = () => this.click_bidak(pihak, i);
-            }
+            const index = this.data[y][x].substring(1, 3);
+            this.bidak[pihak][index].death();
+            this.bidak[pihak][parseInt(this.data[y][x].substring(4))] = null;
+            this.bidak[pihak].splice(this.bidak[pihak].indexOf(null), 1);
+
         }
 
         const pihak = this.jalan_putih ? "ph" : "hp";
@@ -136,10 +131,15 @@ class Board {
 
         const rboard = new Array(8).fill().map(() => new Array(8).fill('x'));
         const allBidak = [...this.bidak['h'], ...this.bidak['p']];
-
-        for (let i = 0; i < allBidak.length; i++) {
-            const {y, x, pihak, i_index, nama} = allBidak[i];
-            rboard[y][x] = pihak + nama + i_index;
+ 
+        for (let i = 0; i < 2; i++) {
+            let j = 0;
+            allBidak.forEach( bd => {
+                // console.log(bd);
+                const {y, x, pihak, nama} = this.bidak[i == 0 ? 'h' : 'p'][bd.substring(1)];
+                rboard[y][x] = pihak + nama + j;
+                j++
+            });
         }
         return rboard;
 
@@ -148,18 +148,12 @@ class Board {
     // Method
     is_safe_king (pihak, musuh) {
 
-        let row, column;
-        for (let i = 0; i < this.data.length; i++) {
-            for (let j = 0; j < this.data[i].length; j++) {
-                if (this.data[i][j][0] == pihak && this.data[i][j][1] == "r") {
-                    row = j;
-                    column = i;
-                }
-            }   
-        }
+        let row = this.bidak[pihak]["r"].x;
+        let column = this.bidak[pihak]["r"].y;
+
         const musuh_moves = this.all_legal_move(musuh);
         for (let i = 0; i < musuh_moves.length; i++) {
-            const moves = musuh_moves[i][3];
+            const moves = musuh_moves[i];
             for (let j = 0; j < moves.length; j++) {
                 const move = moves[j];
                 if (move[0] === row && move[1] === column) {
@@ -184,6 +178,9 @@ class Board {
 
         let l_tmp_x;
         let l_tmp_y;
+        let tmp_object;
+        let tmp_index;
+        let pihak;
         let check = false;
         const tmp_x = this.bidak[i][j].x;
         const tmp_y = this.bidak[i][j].y;
@@ -195,29 +192,29 @@ class Board {
         if (this.data[y][x] != "x") {
 
             check = true;
-            const pihak = this.data[y][x][0];
-            const index = parseInt(this.data[y][x].substring(2));
-            const arrBidak = this.bidak[pihak];
-            this.bidak_musuh = arrBidak[index];
+            pihak = this.data[y][x][0];
+            const index = this.data[y][x].substring(1, 3);
+            tmp_object = this.bidak[pihak][index];
+            tmp_object.death();
+            this.bidak[pihak][parseInt(this.data[y][x].substring(4))] = null;
 
-            l_tmp_x = this.bidak_musuh.x;
-            l_tmp_y = this.bidak_musuh.y;
-            this.bidak_musuh.y = 100;
-            this.bidak_musuh.x = 100;
+            tmp_index = this.bidak[pihak].indexOf(null);
+            this.bidak[pihak].splice(tmp_index, 1);
 
         }
 
         this.data = this.representasi_board();
-        const pihak = this.jalan_putih ? "ph" : "hp";
+        pihak = this.jalan_putih ? "ph" : "hp";
         const hasil = this.is_safe_king(pihak[0], pihak[1]);
+
         this.jalan_putih = !this.jalan_putih;
-        console.log(tmp_x + " " + tmp_y);
         this.bidak[i][j].x = tmp_x;
         this.bidak[i][j].y = tmp_y;
 
         if (check) {
-            this.bidak_musuh.x = l_tmp_x;
-            this.bidak_musuh.y = l_tmp_y;
+            this.bidak[pihak[1]][tmp_object.nama] = tmp_object;
+            this.bidak[pihak[1]][tmp_object.nama].x = l_tmp_x;
+            this.bidak[pihak[1]][tmp_object.nama].y = l_tmp_y;
         }
 
         return hasil;
@@ -246,7 +243,7 @@ class Board {
         this.lm = this.bidak[i][j].legal_move(this.data);
         if (this.bidak[i][j].nama == "r" && this.bidak[i][j].first) {
             this.bidak[i][j].special_move(this.data).forEach(dt => {
-                if (dt[0] < this.bidak[i][j].x && ) {
+                if (dt[0] < this.bidak[i][j].x && this.bidak[i]["b"].first) {
                     
                 }
             });
@@ -302,20 +299,16 @@ class Board {
     all_legal_move (pihak) {
 
         this.a_lmove = [];
-        const bidak = this.bidak[pihak];
-        for (let i = 0; i < bidak.length; i++) {
+        const bidak = [...this.bidak[pihak]];
+        bidak.forEach(bd => {
 
-            this.lmove = bidak[i].legal_move(this.representasi_board());
+            const i = bd.substring(1);
+            this.lmove = this.bidak[pihak][i].legal_move(this.representasi_board());
             if (this.lmove.length > 0) {
-                this.tmp = [];
-                this.tmp.push(bidak[i].position_str());
-                this.tmp.push(bidak[i].nama);
-                this.tmp.push(pihak);
-                this.tmp.push(this.lmove);
-                this.a_lmove.push(this.tmp);
+                this.a_lmove.push(this.lmove);
             }
             
-        }
+        });
         return this.a_lmove;
 
     }
