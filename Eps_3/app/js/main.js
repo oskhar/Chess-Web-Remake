@@ -135,6 +135,18 @@ class Board {
         } else if (this.is_safe_king(pihak[1], pihak[0])) {
             this.bidak[pihak[1]]["r"].hapus_bahaya();
         }
+        if (this.bidak[i][j].nama[0] = "p") {
+            if (this.bidak[i][j].y == 7 || this.bidak[i][j].y == 0) {
+
+                this.bidak[i][j] = new ObjectBidak["q"](
+                    "./assets/images/" + this.bidak[i][j].pihak + "/q.svg", this.bidak[i][j].x, this.bidak[i][j].y,
+                    9,
+                    this.papan_catur,
+                    this.area, this.bidak[i][j].pihak, "q1"
+                );
+                
+            }
+        }
         
     }
 

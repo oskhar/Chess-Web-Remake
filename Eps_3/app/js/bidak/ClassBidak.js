@@ -35,18 +35,6 @@ export class ClassBidak {
     }
 
     // Method
-    death_siri () {
-        this.element.style.opacity = 0;
-
-    }
-
-    // Method
-    undeath_siri () {
-        this.element.style.opacity = 1;
-
-    }
-
-    // Method
     position_str () {
         return String.fromCharCode(97+this.x) + this.y;
 
