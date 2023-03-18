@@ -44,18 +44,25 @@ class Board {
     }
 
     // Method
+    resize_board () {
+
+        this.papan_catur.style.height = (this.area * 8) + "px";
+        this.papan_catur.style.width = (this.area * 8) + "px";
+        this.papan_permukaan.style.height = (this.area * 8) + "px";
+        this.papan_permukaan.style.width = (this.area * 8) + "px";
+
+    }
+
+    // Method
     draw_area () {
 
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
 
                 let element = document.createElement("div");
-                element.style.position = "absolute";
-                element.style.height = this.area + "px";
-                element.style.width = this.area + "px";
+                element.id = "area";
                 element.style.top = (i*this.area) + "px";
                 element.style.left = (j*this.area) + "px";
-                element.style.borderRadius = "5px";
                 element.style.background = (i+j) % 2 == 0 ? "#f0dab5" : "#b48662";
                 this.papan_catur.appendChild(element);
 
@@ -120,7 +127,7 @@ class Board {
         const pihak = this.jalan_putih ? "ph" : "hp";
         this.king_safe = this.is_safe_king(pihak[0], pihak[1]);
         if (!this.king_safe) {
-            this.bidak[pihak[0]]
+            this.bidak[pihak[0]]["r"].bahaya();
         }
         this.data = this.representasi_board();
         
@@ -135,7 +142,7 @@ class Board {
         for (let i = 0; i < 2; i++) {
             let j = 0;
             allBidak.forEach( bd => {
-                // console.log(bd);
+                console.log(bd);
                 const {y, x, pihak, nama} = this.bidak[i == 0 ? 'h' : 'p'][bd.substring(1)];
                 rboard[y][x] = pihak + nama + j;
                 j++
@@ -195,7 +202,7 @@ class Board {
             pihak = this.data[y][x][0];
             const index = this.data[y][x].substring(1, 3);
             tmp_object = this.bidak[pihak][index];
-            tmp_object.death();
+            tmp_object.death_siri();
             this.bidak[pihak][parseInt(this.data[y][x].substring(4))] = null;
 
             tmp_index = this.bidak[pihak].indexOf(null);
@@ -212,6 +219,7 @@ class Board {
         this.bidak[i][j].y = tmp_y;
 
         if (check) {
+            tmp_object.undeath_siri();
             this.bidak[pihak[1]][tmp_object.nama] = tmp_object;
             this.bidak[pihak[1]][tmp_object.nama].x = l_tmp_x;
             this.bidak[pihak[1]][tmp_object.nama].y = l_tmp_y;
@@ -282,30 +290,28 @@ class Board {
         this.tmp_y = this.area * y;
 
         this.lingkaran = document.createElement("div");
-        this.lingkaran.style.position = "absolute";
-        this.lingkaran.style.height = this.area/2 + "px";
-        this.lingkaran.style.width = this.area/2 + "px";
+        this.lingkaran.id = "lingkaran";
         this.lingkaran.style.left = (this.tmp_x + (this.area/4)) + "px";
         this.lingkaran.style.top = (this.tmp_y + (this.area/4)) + "px";
-        this.lingkaran.style.zIndex = "2";
-        this.lingkaran.style.background = "rgba(0, 0, 0, 0.5)";
-        this.lingkaran.style.borderRadius = "50%";
         this.lingkaran.addEventListener("click", this.move.bind(this, i, j, x, y));
         this.papan_permukaan.appendChild(this.lingkaran);
 
     }
 
     // Method
-    all_legal_move (pihak) {
+    all_legal_move (pihak, unuse) {
 
         this.a_lmove = [];
         const bidak = [...this.bidak[pihak]];
         bidak.forEach(bd => {
 
             const i = bd.substring(1);
-            this.lmove = this.bidak[pihak][i].legal_move(this.representasi_board());
-            if (this.lmove.length > 0) {
-                this.a_lmove.push(this.lmove);
+            if (i != unuse) {
+                this.lmove = this.bidak[pihak][i].legal_move(this.representasi_board());
+                if (this.lmove.length > 0) {
+                    this.a_lmove.push(this.lmove);
+                }
+                
             }
             
         });
@@ -338,4 +344,8 @@ class Board {
 
 } 
 
-const run = new Board();
+const run = new Board(((innerHeight < innerWidth ? innerHeight : innerWidth)-100)/8);
+document.body.onresize = function () {
+    run.area = ((innerHeight < innerWidth ? innerHeight : innerWidth)-100)/8;
+    run.resize_board();
+ };

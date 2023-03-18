@@ -17,12 +17,9 @@ export class ClassBidak {
 
         // Bentuk bidak
         this.element = document.createElement("div");
-        this.element.style.position = "absolute";
-        this.element.style.height = this.area + "px";
-        this.element.style.width = this.area + "px";
+        this.element.id = "bidak";
         this.element.style.left = this.x * this.area + "px";
         this.element.style.top = this.y * this.area + "px";
-        this.element.style.zIndex = "1";
         this.element.style.background = "url('" + gambar + "')";
         this.element.style.backgroundSize = "100%";
         this.element.style.backgroundPosition = "center";
@@ -34,6 +31,18 @@ export class ClassBidak {
     // Method
     death () {
         this.element.remove();
+
+    }
+
+    // Method
+    death_siri () {
+        this.element.style.opacity = 0;
+
+    }
+
+    // Method
+    undeath_siri () {
+        this.element.style.opacity = 1;
 
     }
 

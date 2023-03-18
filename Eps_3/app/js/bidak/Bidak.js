@@ -387,6 +387,24 @@ export class Raja extends ClassBidak {
     }
 
     // Method
+    bahaya (x, y) {
+        
+        this.not = document.createElement("div");
+        this.not.id = "not";
+        this.not.style.left = this.x * this.area + "px";
+        this.not.style.top = this.y * this.area + "px";
+        this.papan_catur.appendChild(this.not);
+
+    }
+
+    // Method
+    hapus_bahaya () {
+        
+        this.not.delete();
+
+    }
+
+    // Method
     special_move (data) {
 
         this.lmove = [];
