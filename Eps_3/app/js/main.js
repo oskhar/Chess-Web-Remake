@@ -14,6 +14,10 @@ class Board {
 
         // Atribute
         this.data = [];
+        this.death = {
+            "h": [],
+            "p": []
+        }
         this.area = area;
         this.jalan_putih = true;
         this.king_safe = true;
@@ -117,10 +121,9 @@ class Board {
         if (this.data[y][x] != "x") {
 
             const pihak = this.data[y][x][0];
-            const index = this.data[y][x].substring(1, 3);
+            const index = this.data[y][x].substring(1);
             this.bidak[pihak][index].death();
-            this.bidak[pihak][parseInt(this.data[y][x].substring(4))] = null;
-            this.bidak[pihak].splice(this.bidak[pihak].indexOf(null), 1);
+            this.death[pihak].push(index);
 
         }
 
@@ -128,6 +131,8 @@ class Board {
         this.king_safe = this.is_safe_king(pihak[0], pihak[1]);
         if (!this.king_safe) {
             this.bidak[pihak[0]]["r"].bahaya();
+        } else if (this.is_safe_king(pihak[1], pihak[0])) {
+            this.bidak[pihak[1]]["r"].hapus_bahaya();
         }
         this.data = this.representasi_board();
         
@@ -140,12 +145,15 @@ class Board {
         const allBidak = [...this.bidak['h'], ...this.bidak['p']];
  
         for (let i = 0; i < 2; i++) {
-            let j = 0;
             allBidak.forEach( bd => {
-                console.log(bd);
-                const {y, x, pihak, nama} = this.bidak[i == 0 ? 'h' : 'p'][bd.substring(1)];
-                rboard[y][x] = pihak + nama + j;
-                j++
+
+                const ph = i == 0 ? 'h' : 'p';
+                if (this.death[ph].indexOf(bd.substring(1)) == -1) {
+
+                    const {y, x, pihak, nama} = this.bidak[ph][bd.substring(1)];
+                    rboard[y][x] = pihak + nama;
+
+                }
             });
         }
         return rboard;
@@ -153,12 +161,12 @@ class Board {
     }
 
     // Method
-    is_safe_king (pihak, musuh) {
+    is_safe_king (pihak, musuh, unuse = "") {
 
         let row = this.bidak[pihak]["r"].x;
         let column = this.bidak[pihak]["r"].y;
 
-        const musuh_moves = this.all_legal_move(musuh);
+        const musuh_moves = this.all_legal_move(musuh, unuse);
         for (let i = 0; i < musuh_moves.length; i++) {
             const moves = musuh_moves[i];
             for (let j = 0; j < moves.length; j++) {
@@ -183,47 +191,27 @@ class Board {
     // Method
     check_move (i, j, x, y) {
 
-        let l_tmp_x;
-        let l_tmp_y;
-        let tmp_object;
-        let tmp_index;
         let pihak;
-        let check = false;
+        let check = "";
+        const tmp_jalan = this.jalan_putih;
         const tmp_x = this.bidak[i][j].x;
         const tmp_y = this.bidak[i][j].y;
 
         this.bidak[i][j].x = x;
         this.bidak[i][j].y = y;
-        this.jalan_putih = !this.jalan_putih;
 
         if (this.data[y][x] != "x") {
-
-            check = true;
-            pihak = this.data[y][x][0];
-            const index = this.data[y][x].substring(1, 3);
-            tmp_object = this.bidak[pihak][index];
-            tmp_object.death_siri();
-            this.bidak[pihak][parseInt(this.data[y][x].substring(4))] = null;
-
-            tmp_index = this.bidak[pihak].indexOf(null);
-            this.bidak[pihak].splice(tmp_index, 1);
+            check = this.data[y][x].substring(1);
 
         }
 
         this.data = this.representasi_board();
-        pihak = this.jalan_putih ? "ph" : "hp";
-        const hasil = this.is_safe_king(pihak[0], pihak[1]);
+        pihak = tmp_jalan ? "ph" : "hp";
+        let hasil = this.is_safe_king(pihak[0], pihak[1], check);
 
-        this.jalan_putih = !this.jalan_putih;
         this.bidak[i][j].x = tmp_x;
         this.bidak[i][j].y = tmp_y;
-
-        if (check) {
-            tmp_object.undeath_siri();
-            this.bidak[pihak[1]][tmp_object.nama] = tmp_object;
-            this.bidak[pihak[1]][tmp_object.nama].x = l_tmp_x;
-            this.bidak[pihak[1]][tmp_object.nama].y = l_tmp_y;
-        }
+        this.data = this.representasi_board();
 
         return hasil;
         
@@ -250,12 +238,7 @@ class Board {
         // Seleksi legal_move
         this.lm = this.bidak[i][j].legal_move(this.data);
         if (this.bidak[i][j].nama == "r" && this.bidak[i][j].first) {
-            this.bidak[i][j].special_move(this.data).forEach(dt => {
-                if (dt[0] < this.bidak[i][j].x && this.bidak[i]["b"].first) {
-                    
-                }
-            });
-            
+            console.log(this.bidak[i][j].special_move(this.data));
         }
         for (let x = 0; x < this.lm.length; x++) {
             if (!this.king_safe) {
@@ -306,8 +289,8 @@ class Board {
         bidak.forEach(bd => {
 
             const i = bd.substring(1);
-            if (i != unuse) {
-                this.lmove = this.bidak[pihak][i].legal_move(this.representasi_board());
+            if (i != unuse && this.death[pihak].indexOf(i) == -1) {
+                this.lmove = this.bidak[pihak][i].legal_move(this.data);
                 if (this.lmove.length > 0) {
                     this.a_lmove.push(this.lmove);
                 }

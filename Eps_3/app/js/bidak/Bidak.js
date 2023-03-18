@@ -399,8 +399,8 @@ export class Raja extends ClassBidak {
 
     // Method
     hapus_bahaya () {
-        
-        this.not.delete();
+        if (this.not !== undefined)
+            this.not.remove();
 
     }
 
@@ -411,16 +411,17 @@ export class Raja extends ClassBidak {
         if (data[this.y][this.x-1] == "x") {
             if (data[this.y][this.x-2] == "x") {
                 if (data[this.y][this.x-3] == "x") {
-                    this.lmove.push([this.x - 1, this.y]);
+                    return -1;
                 }
             }
         }
         if (data[this.y][this.x+1] == "x") {
             if (data[this.y][this.x+2] == "x") {
-                this.lmove.push([this.x + 1, this.y]);
+                return 1;
             }
         }
-        return this.lmove;
+        
+        return 0;
 
     }
 
