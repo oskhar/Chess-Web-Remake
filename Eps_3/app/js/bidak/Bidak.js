@@ -411,16 +411,16 @@ export class Raja extends ClassBidak {
         if (data[this.y][this.x-1] == "x") {
             if (data[this.y][this.x-2] == "x") {
                 if (data[this.y][this.x-3] == "x") {
-                    return -1;
+                    return 1;
                 }
             }
         }
         if (data[this.y][this.x+1] == "x") {
             if (data[this.y][this.x+2] == "x") {
-                return 1;
+                return 2;
             }
         }
-        
+
         return 0;
 
     }

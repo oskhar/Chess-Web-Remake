@@ -127,6 +127,7 @@ class Board {
 
         }
 
+        this.data = this.representasi_board();
         const pihak = this.jalan_putih ? "ph" : "hp";
         this.king_safe = this.is_safe_king(pihak[0], pihak[1]);
         if (!this.king_safe) {
@@ -134,7 +135,6 @@ class Board {
         } else if (this.is_safe_king(pihak[1], pihak[0])) {
             this.bidak[pihak[1]]["r"].hapus_bahaya();
         }
-        this.data = this.representasi_board();
         
     }
 
@@ -237,9 +237,16 @@ class Board {
 
         // Seleksi legal_move
         this.lm = this.bidak[i][j].legal_move(this.data);
-        if (this.bidak[i][j].nama == "r" && this.bidak[i][j].first) {
-            console.log(this.bidak[i][j].special_move(this.data));
+
+        if (j == "r" && this.bidak[i][j].first) {
+            const tmp = this.bidak[i][j].special_move(this.data);
+            if (tmp != 0 && this.king_safe) {
+                if (this.bidak[i]["b"+tmp].first) {
+                    this.area_special(i, "b"+tmp);
+                }
+            }
         }
+
         for (let x = 0; x < this.lm.length; x++) {
             if (!this.king_safe) {
                 if (this.check_move(
@@ -263,6 +270,45 @@ class Board {
 
             }
         }
+
+    }
+
+    // Method
+    area_special (i, b) {
+
+        const x = (this.bidak[i]["r"].x + (b[1] == "1" ? -2 : 2));
+        const y = this.bidak[i]["r"].y;
+
+        this.lingkaran = document.createElement("div");
+        this.lingkaran.id = "lingkaran";
+        this.lingkaran.style.left = (x * this.area + (this.area/4)) + "px";
+        this.lingkaran.style.top = (y * this.area + (this.area/4)) + "px";
+        this.lingkaran.addEventListener("click", this.special_move.bind(this, i, b, x, y, (this.bidak[i]["r"].x + (b[1] == "1" ? -1 : 1))));
+        this.papan_permukaan.appendChild(this.lingkaran);
+
+    }
+
+    // Method
+    special_move (i, b, x, y, tmp_x) {
+
+        this.hapus_permukaan();
+
+        this.bidak[i][b].x = tmp_x;
+        this.bidak[i][b].y = y;
+        this.bidak[i][b].element.style.left = tmp_x * this.area + "px";
+        this.bidak[i][b].element.style.top = y * this.area + "px";
+
+        this.bidak[i]["r"].x = x;
+        this.bidak[i]["r"].y = y;
+        this.bidak[i]["r"].element.style.left = x * this.area + "px";
+        this.bidak[i]["r"].element.style.top = y * this.area + "px";
+
+        this.bidak[i]["r"].first = false;
+        this.bidak[i][b].first = false;
+
+        this.jalan_putih = !this.jalan_putih;
+
+        this.data = this.representasi_board();
 
     }
 
