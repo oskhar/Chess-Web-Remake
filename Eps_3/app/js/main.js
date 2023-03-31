@@ -85,8 +85,7 @@ class Board {
                 this.pihak = (i < 2) ? 'h' : 'p';
                 this.index = (i < 2) ? i*8+j : (i-2)*8+j;
                 const piece = this.bidak[this.pihak][this.index].substring(1);
-                const warna = (i < 2) ? "hitam" : "putih";
-                const path = "./assets/images/" + warna + "/" + piece[0] + ".svg";
+                const path = "./assets/images/" + this.pihak + "/" + piece[0] + ".svg";
 
                 this.bidak[this.pihak][piece] = new ObjectBidak[piece[0]](
                     path, j, this.tmp,
@@ -126,6 +125,24 @@ class Board {
             this.death[pihak].push(index);
 
         }
+        if (this.bidak[i][j].nama[0] == "p") {
+            if (this.bidak[i][j].y == 7 || this.bidak[i][j].y == 0) {
+
+                const nama = "q"+this.bidak[i][j].nama[1];
+                this.bidak[i][j].death();
+                this.death[i].push(j);
+                this.bidak[i][nama] = new ObjectBidak["q"](
+                    "./assets/images/" + this.bidak[i][j].pihak + "/q.svg", this.bidak[i][j].x, this.bidak[i][j].y,
+                    9,
+                    this.papan_catur,
+                    this.area, this.bidak[i][j].pihak, nama
+                );
+                this.bidak[i].push(nama);
+                this.bidak[i][nama].element.onclick = this.click_bidak.bind(this, i, nama);
+                console.log(this.bidak[i]);
+                
+            }
+        }
 
         this.data = this.representasi_board();
         const pihak = this.jalan_putih ? "ph" : "hp";
@@ -134,18 +151,6 @@ class Board {
             this.bidak[pihak[0]]["r"].bahaya();
         } else if (this.is_safe_king(pihak[1], pihak[0])) {
             this.bidak[pihak[1]]["r"].hapus_bahaya();
-        }
-        if (this.bidak[i][j].nama[0] = "p") {
-            if (this.bidak[i][j].y == 7 || this.bidak[i][j].y == 0) {
-
-                this.bidak[i][j] = new ObjectBidak["q"](
-                    "./assets/images/" + this.bidak[i][j].pihak + "/q.svg", this.bidak[i][j].x, this.bidak[i][j].y,
-                    9,
-                    this.papan_catur,
-                    this.area, this.bidak[i][j].pihak, "q1"
-                );
-                
-            }
         }
         
     }
